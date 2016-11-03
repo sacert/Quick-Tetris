@@ -16,25 +16,29 @@ var gameOver = false;
 window.addEventListener("keydown", controls, false);
 
 function controls(e) {
-  e.preventDefault();
   if(e.keyCode == 38) { // up key
+    e.preventDefault();
     var rotShape = rotate();
     if(valid(0,0,rotShape)) {
       shape = rotShape;
     }
   } else if(e.keyCode == 39) { // right key
+    e.preventDefault();
     if(valid(1)) {
       currX++;
     }
   } else if(e.keyCode == 37) { // left key
+    e.preventDefault();
     if(valid(-1)) {
       currX--;
     }
   } else if(e.keyCode == 40) { // down key
+    e.preventDefault();
     if(valid(0,1)) {
       currY++;
     }
   } else if(e.keyCode == 32) { // spacebar
+    e.preventDefault();
     dropDown();
   } else if(e.keyCode == 82) { // reset 'r'
     newGame();
