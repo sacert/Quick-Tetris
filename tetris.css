@@ -1,6 +1,6 @@
 @font-face {
   font-family: bubble;
-  src: url(bubble.ttf);
+  src: url(assets/bubble.ttf);
 }
 
 canvas {
