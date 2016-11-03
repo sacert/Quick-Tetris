@@ -1,0 +1,26 @@
+@font-face {
+  font-family: bubble;
+  src: url(bubble.ttf);
+}
+
+canvas {
+    display: block;
+    margin: auto;
+    border: 5px solid black;
+    border-radius: 5px;
+    background-color: #2F4F4F;
+}
+
+#title {
+  text-align: center;
+  padding: 20px;
+  font-family: bubble;
+  font-size: 50px;
+}
+
+#guide {
+  text-align: center;
+  padding: 20px;
+  font-family: bubble;
+  font-size: 30px;
+}
