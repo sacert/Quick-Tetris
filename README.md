@@ -1,8 +1,8 @@
 # Quick Tetris
 
-Built a quick version of Tetris using html/css/javascript
+####Try it out at: https://sacert.github.io/Quick-Tetris/
 
-Try it out at: https://sacert.github.io/Quick-Tetris/
+Built a quick version of Tetris using html/css/javascript
 
 Inspired by https://github.com/jstimpfle/tetris-on-a-plane/ who built Tetris during a plane ride - I decided to do the same except I set my deadline as the time before I had to start studying for my midterm.
 
