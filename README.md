@@ -8,6 +8,6 @@ Inspired by https://github.com/jstimpfle/tetris-on-a-plane/ who built Tetris dur
 
 Of course due to time constraints, there are several features missing such as displaying the next block that will drop, a scoring system, and a game over screen. And to add, yes the code is messy but it works!
 
-<img style="float: right;" src="tetris-sreen.png" width="458" height="400">
+<img style="float: right;" src="assets/tetris-screen.png" width="458" height="400">
 
 
