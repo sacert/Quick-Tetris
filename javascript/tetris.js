@@ -16,6 +16,7 @@ var gameOver = false;
 window.addEventListener("keydown", controls, false);
 
 function controls(e) {
+  e.preventDefault();
   if(e.keyCode == 38) { // up key
     var rotShape = rotate();
     if(valid(0,0,rotShape)) {
