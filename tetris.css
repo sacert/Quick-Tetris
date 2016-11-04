@@ -3,6 +3,12 @@
   src: url(assets/bubble.ttf);
 }
 
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+}
+
 canvas {
     display: block;
     margin: auto;
@@ -16,6 +22,10 @@ canvas {
   padding: 20px;
   font-family: bubble;
   font-size: 50px;
+}
+
+#container {
+			height: 60%;
 }
 
 #guide {

@@ -13,6 +13,7 @@ var firstTime = true;
 var pieceSize;
 var gameOver = false;
 
+window.addEventListener('resize', resizeCanvas, false);
 window.addEventListener("keydown", controls, false);
 
 function controls(e) {
@@ -140,7 +141,7 @@ function draw() {
             }
             else {
               ctx.strokeStyle = 'black';
-              ctx.lineWidth = "0.1";
+              ctx.lineWidth = "0.8";
               ctx.fillStyle = 'white';
               ctx.fillRect( BLOCK_W * x+1, BLOCK_H * y+1, BLOCK_W - 1 , BLOCK_H - 1 );
               ctx.strokeRect( BLOCK_W * x, BLOCK_H * y, BLOCK_W - 1 , BLOCK_H - 1 );
@@ -272,11 +273,21 @@ function newGame() {
 }
 
 function startGame() {
+    resizeCanvas();
     init();
     createShape();
     draw();
     setInterval( tick, 250 );
     setInterval( draw, 30 );
+}
+
+function resizeCanvas() {
+  c.width = ((window.innerHeight/1.3) / 1.714);
+  c.height = window.innerHeight/1.3;
+  w = c.width;
+  h = c.height;
+  BLOCK_W = w/ COLS;
+  BLOCK_H  = h/ ROWS;
 }
 
 startGame();
