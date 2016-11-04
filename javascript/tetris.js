@@ -12,6 +12,7 @@ var currX, currY;
 var firstTime = true;
 var pieceSize;
 var gameOver = false;
+var audio = new Audio('assets/Tetris.mp3');
 
 window.addEventListener('resize', resizeCanvas, false);
 window.addEventListener("keydown", controls, false);
@@ -177,6 +178,10 @@ function tick() {
   }
 }
 
+function playMusic() {
+    audio.play();
+}
+
 function isGameOver() {
   for ( var y = 0; y < pieceSize; ++y ) {
     for ( var x = 0; x < pieceSize; ++x ) {
@@ -263,6 +268,8 @@ function dropDown() {
 }
 
 function newGame() {
+  audio.pause();
+  audio.currentTime = 0;
   for ( var y = 0; y < ROWS; ++y ) {
     for ( var x = 0; x < COLS; ++x ) {
       tetrisBoard[y][x] = 0;
@@ -270,6 +277,7 @@ function newGame() {
   }
   gameOver = false;
   createShape();
+  playMusic();
 }
 
 function startGame() {
@@ -277,8 +285,10 @@ function startGame() {
     init();
     createShape();
     draw();
+    playMusic();
     setInterval( tick, 250 );
     setInterval( draw, 30 );
+
 }
 
 function resizeCanvas() {
