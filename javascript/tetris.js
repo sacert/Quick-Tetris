@@ -1,3 +1,5 @@
+// the great wall of variables
+// ugly yet satisfying 
 var c = document.getElementsByTagName('canvas')[0];
 var ctx = c.getContext("2d");
 var w = 350;
@@ -11,8 +13,6 @@ var tetrisBoard = [];
 var currX, currY;
 var firstTime = true;
 var pieceSize;
-var gameOver = false;
-var audio = new Audio('assets/Tetris.mp3');
 
 window.addEventListener('resize', resizeCanvas, false);
 window.addEventListener("keydown", controls, false);
@@ -171,25 +171,23 @@ function tick() {
   } else {
     modifyBoard();
     lineCheck();
-    if(gameOver) {
+    if(isGameOver()) {
       return;
     }
     createShape();
   }
 }
 
-function playMusic() {
-    audio.play();
-}
-
 function isGameOver() {
-  for ( var y = 0; y < pieceSize; ++y ) {
-    for ( var x = 0; x < pieceSize; ++x ) {
-      if(shape[y][x] && tetrisBoard[y-1][x+3]) {
-        return true;
+  var overlapping = false;
+  for ( var y = 0; y < pieceSize; y++ ) {
+    for ( var x = 0; x < pieceSize; x++ ) {
+      if(shape[y][x] && (tetrisBoard[y-1][x+3] || tetrisBoard[y][x+3])) {
+        overlapping = true;
       }
     }
   }
+  return overlapping;
 }
 
 function lineCheck() {
@@ -231,8 +229,8 @@ function valid( offsetX, offsetY, newCurrent ) {
     offsetY = currY + offsetY;
     newCurrent = newCurrent || shape;
 
-    for ( var y = 0; y < pieceSize; ++y ) {
-        for ( var x = 0; x < pieceSize; ++x ) {
+    for ( var y = 0; y < pieceSize; y++ ) {
+        for ( var x = 0; x < pieceSize; x++ ) {
             if ( newCurrent[ y ][ x ] ) {
                 if ( typeof tetrisBoard[ y + offsetY ] == 'undefined'
                   || typeof tetrisBoard[ y + offsetY ][ x + offsetX ] == 'undefined'
@@ -240,9 +238,6 @@ function valid( offsetX, offsetY, newCurrent ) {
                   || x + offsetX < 0
                   || y + offsetY >= ROWS
                   || x + offsetX >= COLS ) {
-                    if(offsetY == 0 || offsetY == 1) {
-                      gameOver = true;
-                    }
                     return false;
                 }
             }
@@ -268,8 +263,6 @@ function dropDown() {
 }
 
 function newGame() {
-  audio.pause();
-  audio.currentTime = 0;
   for ( var y = 0; y < ROWS; ++y ) {
     for ( var x = 0; x < COLS; ++x ) {
       tetrisBoard[y][x] = 0;
@@ -277,7 +270,6 @@ function newGame() {
   }
   gameOver = false;
   createShape();
-  playMusic();
 }
 
 function startGame() {
@@ -285,7 +277,7 @@ function startGame() {
     init();
     createShape();
     draw();
-    playMusic();
+
     setInterval( tick, 250 );
     setInterval( draw, 30 );
 
