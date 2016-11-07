@@ -1,5 +1,5 @@
-// the great wall of variables
-// ugly yet satisfying 
+// great wall of global variables
+// travelers beware
 var c = document.getElementsByTagName('canvas')[0];
 var ctx = c.getContext("2d");
 var w = 350;
@@ -13,6 +13,7 @@ var tetrisBoard = [];
 var currX, currY;
 var firstTime = true;
 var pieceSize;
+var gameOver = false;
 
 window.addEventListener('resize', resizeCanvas, false);
 window.addEventListener("keydown", controls, false);
@@ -171,23 +172,11 @@ function tick() {
   } else {
     modifyBoard();
     lineCheck();
-    if(isGameOver()) {
+    if(gameOver) {
       return;
     }
     createShape();
   }
-}
-
-function isGameOver() {
-  var overlapping = false;
-  for ( var y = 0; y < pieceSize; y++ ) {
-    for ( var x = 0; x < pieceSize; x++ ) {
-      if(shape[y][x] && (tetrisBoard[y-1][x+3] || tetrisBoard[y][x+3])) {
-        overlapping = true;
-      }
-    }
-  }
-  return overlapping;
 }
 
 function lineCheck() {
@@ -229,8 +218,8 @@ function valid( offsetX, offsetY, newCurrent ) {
     offsetY = currY + offsetY;
     newCurrent = newCurrent || shape;
 
-    for ( var y = 0; y < pieceSize; y++ ) {
-        for ( var x = 0; x < pieceSize; x++ ) {
+    for ( var y = 0; y < pieceSize; ++y ) {
+        for ( var x = 0; x < pieceSize; ++x ) {
             if ( newCurrent[ y ][ x ] ) {
                 if ( typeof tetrisBoard[ y + offsetY ] == 'undefined'
                   || typeof tetrisBoard[ y + offsetY ][ x + offsetX ] == 'undefined'
@@ -238,6 +227,9 @@ function valid( offsetX, offsetY, newCurrent ) {
                   || x + offsetX < 0
                   || y + offsetY >= ROWS
                   || x + offsetX >= COLS ) {
+                    if((offsetY == 0 || offsetY == 1) && (offsetX >= 0 && offsetX < 11 - pieceSize)) {
+                      gameOver = true;
+                    }
                     return false;
                 }
             }
