@@ -1,6 +1,6 @@
 # Quick Tetris
 
-####Try it out at: https://sacert.github.io/Quick-Tetris/
+#### Try it out at: https://sacert.github.io/Quick-Tetris/
 
 Built a quick version of Tetris using html/css/javascript
 
